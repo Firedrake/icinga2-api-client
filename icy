@@ -59,7 +59,7 @@ foreach my $hostdata (@{$j->{results}}) {
     if (exists $hoststat{$host}) {
       $hostline .= $hoststat{$host};
     }
-    if (keys %hostfilter && (!exists $hostfilter{$host} || !$o{a})) {
+    if (keys %hostfilter && !exists $hostfilter{$host} && !$o{a}) {
       next;
     }
     print "$hostline\n";
