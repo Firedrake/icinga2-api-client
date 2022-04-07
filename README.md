@@ -27,7 +27,7 @@ You will need a credentials file, a JSON file containing keys:
     "username": its API username
     "password": its API password
 
-## Operation
+## Operation (icy)
 
 Command-line parameters are:
 
@@ -51,6 +51,30 @@ icy -s mdraid - show only non-OK "mdraid" services
 icy -a -s mdraid - show all "mdraid" services
 
 icy -a wuerfelbrenner - show all services on host wuerfelbrenner
+
+## Operation (icy-downtime)
+
+This uses a restricted subset of the Icinga's downtime functionality.
+
+List current downtimes with:
+
+icy-downtime (-c conffile)
+
+Put HOSTA and HOSTB and all their services into a 2-hour downtime,
+effective immediately, with a message:
+
+icy-downtime -d -m "Users are boring" HOSTA HOSTB
+
+For a different duration, append XhYmZs for hours, minutes and seconds
+(not all elements are needed).
+
+Remove downtimes on HOSTA and HOSTB:
+
+icy-downtime -u HOSTA HOSTB
+
+Remove downtimes on all hosts:
+
+icy-downtime -u -a
 
 ## Todo
 
