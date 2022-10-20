@@ -84,10 +84,6 @@ Anywhere HOST can be used, HOST/SERVICE or HOST/SERVICE,SERVICE can
 also be used - in this case the host itself won't be put into
 downtime.
 
-## Todo
-
-- start/end downtime
-
 ## Licence
 
 - Gnu GPL v2 (or later, at your discretion)
