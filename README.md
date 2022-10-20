@@ -38,6 +38,8 @@ hosts that are down
 
 -s SERVICE - filter the listed services.
 
+-b - bare listing
+
 and optionally one or more HOSTNAMES
 
 So for example:
@@ -52,6 +54,8 @@ icy -a -s mdraid - show all "mdraid" services
 
 icy -a wuerfelbrenner - show all services on host wuerfelbrenner
 
+icy -b -s apt - give a bare listing of hosts with non-OK "apt" services
+
 ## Operation (icy-downtime)
 
 This uses a restricted subset of the Icinga's downtime functionality.
@@ -65,8 +69,8 @@ effective immediately, with a message:
 
 icy-downtime -d -m "Users are boring" HOSTA HOSTB
 
-For a different duration, append XhYmZs for hours, minutes and seconds
-(not all elements are needed).
+For a different duration, append WdXhYmZs for days. hours, minutes and
+seconds (not all elements are needed).
 
 Remove downtimes on HOSTA and HOSTB:
 
@@ -75,6 +79,10 @@ icy-downtime -u HOSTA HOSTB
 Remove downtimes on all hosts:
 
 icy-downtime -u -a
+
+Anywhere HOST can be used, HOST/SERVICE or HOST/SERVICE,SERVICE can
+also be used - in this case the host itself won't be put into
+downtime.
 
 ## Todo
 
