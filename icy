@@ -10,10 +10,11 @@ use LWP::UserAgent;
 use Getopt::Std;
 
 my %o=(c => $ENV{HOME}.'/.icinga-api.json');
-getopts('has:c:',\%o);
+getopts('hbas:c:',\%o);
 if ($o{h}) {
   print STDERR <<EOF;
-Usage: $0 (-c CONFFILE) (-a) (-s SERVICE) (HOSTNAME) (HOSTNAME...)
+Usage: $0 (-b) (-c CONFFILE) (-a) (-s SERVICE) (HOSTNAME) (HOSTNAME...)
+-b is a bare listing of matching hostnames
 -c points to Icinga credentials file ($o{c})
 -a lists all host/service states, even "OK"
 -s lists only services that match SERVICE
@@ -62,13 +63,17 @@ foreach my $hostdata (@{$j->{results}}) {
     if (keys %hostfilter && !exists $hostfilter{$host}) {
       next;
     }
-    print "$hostline\n";
-    unless (exists $hoststat{$host} && !$o{a}) {
-      foreach my $service (sort keys %{$out{$host}}) {
-        print "$service: ".$out{$host}{$service}{attrs}{last_check_result}{output}."\n";
+    if ($o{b}) {
+      print "$host\n";
+    } else {
+      print "$hostline\n";
+      unless (exists $hoststat{$host} && !$o{a}) {
+        foreach my $service (sort keys %{$out{$host}}) {
+          print "$service: ".$out{$host}{$service}{attrs}{last_check_result}{output}."\n";
+        }
       }
+      print "\n";
     }
-    print "\n";
   }
 }
 
