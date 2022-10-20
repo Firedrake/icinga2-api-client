@@ -55,11 +55,11 @@ foreach my $hostdata (@{$j->{results}}) {
     }
   }
   foreach my $host (sort keys %out) {
-    my $hostline="$host: ";
+    my $hostline="$host:";
     if (exists $hoststat{$host}) {
-      $hostline .= $hoststat{$host};
+      $hostline .= ' '.$hoststat{$host};
     }
-    if (keys %hostfilter && !exists $hostfilter{$host} && !$o{a}) {
+    if (keys %hostfilter && !exists $hostfilter{$host}) {
       next;
     }
     print "$hostline\n";
